@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import {IoMdArrowBack} from 'react-icons/io';
+// import BackButton from "../BackButton";
+// import {withRouter} from 'react-router-dom';
+
 export default class Student extends Component {
   constructor() {
     super();
     this.state = {
       studentInfo: {}
+
     };
+    this.handleBack = this.handleBack.bind(this);
   }
   componentDidMount() {
     axios
@@ -17,11 +23,15 @@ export default class Student extends Component {
       });
       // console.log("hey!!", this.props.grade)
   }
-
+handleBack(){
+  this.props.history.goBack();
+}
   render() {
     return (
     
       <div className="box">
+        
+        <button onClick={this.handleBack}><IoMdArrowBack>Back</IoMdArrowBack>Back</button>
         <h1>Student</h1>
         {
           <h1>

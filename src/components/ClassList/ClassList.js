@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import BackButton from "../BackButton";
 
 export default class ClassList extends Component {
   constructor() {
@@ -9,6 +10,8 @@ export default class ClassList extends Component {
       students: [],
       err: ""
     };
+
+    this.handleBack = this.handleBack.bind(this);
   }
   componentDidMount() {
     axios
@@ -33,6 +36,10 @@ export default class ClassList extends Component {
       });
   }
 
+  handleBack() {
+    this.props.history.push("/");
+  }
+
   render() {
     const mapStudents = this.state.students.map((student, i) => (
       <Link to={`/student/${student.id}`} key={i}>
@@ -43,6 +50,7 @@ export default class ClassList extends Component {
     ));
     return (
       <div className="box">
+        <button onClick={this.handleBack}> Back</button>
         <h1>{this.props.match.params.class}</h1>
         <h2>ClassList:</h2>
         {mapStudents}
